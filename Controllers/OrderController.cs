@@ -30,6 +30,7 @@ namespace WebApplicationLab2.Controllers
 
         // GET: api/Orders
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrder()
         {
             var orders = await _context.Orders
@@ -99,8 +100,6 @@ namespace WebApplicationLab2.Controllers
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
 
         }
-
-        // PUT: api/Blogs/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {

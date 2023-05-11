@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tOx5Y1OWK4VYJiKyU5xDAztjcxs6xZ5ReVMkVxDPeSm5AeumMhwioNw3VL2+m24LkLEwNYrxCq51N8OYnhcjeA==",
+  "dgSpecHash": "X0gfOHGJGbjf5ai6ENBLicQlDYrfzjfMSp+jlMWBpha8oUgJTF3h5eSdx0yAK8w7CNWi5iMUfPvz+svt/U789g==",
   "success": true,
-  "projectFilePath": "D:\\NetConstract\\WebApplicationLab2\\WebApplicationLab2.csproj",
+  "projectFilePath": "F:\\WebApplicationLab2\\WebApplicationLab2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ilya\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Ilya\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

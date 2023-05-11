@@ -5,6 +5,8 @@ using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<CompClubWebContext>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -18,8 +20,6 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<CompClubWebContext>();
 // Add services to the container.
 builder.Services.AddDbContext<CompClubWebContext>();
 //builder.Services.AddDbContext<CompClubDbContext>(opt => opt.UseInMemoryDatabase("CompClub"));
@@ -68,7 +68,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors();
 
 app.UseAuthentication();

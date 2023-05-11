@@ -11,14 +11,15 @@ namespace WebApplicationLab2.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly CompClubWebContext _context;
+        public AccountController(CompClubWebContext context,UserManager<User> userManager, SignInManager<User> signInManager)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
         [HttpPost]
         [Route("api/account/register")]
-        [EnableCors]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
         {
@@ -32,6 +33,13 @@ namespace WebApplicationLab2.Controllers
                     await _userManager.AddToRoleAsync(user, "user");
                     // Установка куки
                     await _signInManager.SignInAsync(user, false);
+                    var client = new Client {
+                        Email = model.Email,
+                        Password = model.Password,
+                        Balance = 0,
+                    Bonus=0,
+                    Role="user"};
+                    _context.Clients.Add(client);
                     return Ok(new { message = "Добавлен новый пользователь: " + user.UserName });
                 }
                 else
@@ -111,6 +119,7 @@ namespace WebApplicationLab2.Controllers
             await _signInManager.SignOutAsync();
             return Ok(new { message = "Выполнен выход", userName = usr.UserName });
         }
+
         [HttpGet]
         [Route("api/account/isauthenticated")]
         public async Task<IActionResult> IsAuthenticated()
@@ -128,5 +137,6 @@ namespace WebApplicationLab2.Controllers
 
         }
         private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
     }
 }

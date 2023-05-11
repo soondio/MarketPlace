@@ -4821,11 +4821,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NetConstract\\WebApplicationLab2\\WebApplicationLab2.csproj",
+      "projectUniqueName": "F:\\WebApplicationLab2\\WebApplicationLab2.csproj",
       "projectName": "WebApplicationLab2",
-      "projectPath": "D:\\NetConstract\\WebApplicationLab2\\WebApplicationLab2.csproj",
+      "projectPath": "F:\\WebApplicationLab2\\WebApplicationLab2.csproj",
       "packagesPath": "C:\\Users\\Ilya\\.nuget\\packages\\",
-      "outputPath": "D:\\NetConstract\\WebApplicationLab2\\obj\\",
+      "outputPath": "F:\\WebApplicationLab2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
