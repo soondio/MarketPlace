@@ -178,3 +178,9 @@ F:\WebApplicationLab2\obj\Debug\net6.0\WebApplicationLab2.csproj.CopyComplete
 F:\WebApplicationLab2\obj\Debug\net6.0\WebApplicationLab2.dll
 F:\WebApplicationLab2\obj\Debug\net6.0\refint\WebApplicationLab2.dll
 F:\WebApplicationLab2\obj\Debug\net6.0\WebApplicationLab2.pdb
+F:\WebApplicationLab2\bin\Debug\net6.0\WebApplicationLab2.deps.json
+F:\WebApplicationLab2\bin\Debug\net6.0\WebApplicationLab2.runtimeconfig.json
+F:\WebApplicationLab2\bin\Debug\net6.0\WebApplicationLab2.dll
+F:\WebApplicationLab2\bin\Debug\net6.0\WebApplicationLab2.pdb
+F:\WebApplicationLab2\obj\Debug\net6.0\WebApplicationLab2.genruntimeconfig.cache
+F:\WebApplicationLab2\obj\Debug\net6.0\ref\WebApplicationLab2.dll

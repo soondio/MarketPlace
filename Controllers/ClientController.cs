@@ -41,7 +41,10 @@ namespace WebApplicationLab2.Controllers
                 Client client = clients.FirstOrDefault(c => c.Email == user.Email);
                 return Ok(client);
             }
-            return NotFound();
+            else
+            {
+                return Unauthorized(new { message = "Сначала выполните вход" });
+            }
         }
         private Task<User> GetCurrentUserAsync() => _usermanager.GetUserAsync(HttpContext.User);
     }
