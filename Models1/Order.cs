@@ -20,6 +20,8 @@ public partial class Order
 
     public DateTime EndDate { get; set; }
 
+    public string? Status { get; set; }
+
     public decimal? TotalPrice { get; set; }
 
     public virtual Client Client { get; set; }
@@ -39,6 +41,7 @@ public class OrderDto
     public int ComputerId { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
+    public string? Status { get; set; }
 
     public ClientDto? Client { get; set; }
 }

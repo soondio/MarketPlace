@@ -5,6 +5,8 @@ using WebApplicationLab2.Models1;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationLab2.Controllers
 {
@@ -14,18 +16,11 @@ namespace WebApplicationLab2.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly CompClubWebContext _context;
-        public OrdersController(CompClubWebContext context)
+        private readonly UserManager<User> _userManager;
+        public OrdersController(CompClubWebContext context, UserManager<User> userManager)
         {
             _context = context;
-            //if (!_context.Orders.Any())
-            //{
-            //    _context.Orders.Add(new Order
-            //    {
-            //        TotalPrice = 100,
-            //        Date=DateTime.Now
-            //    });
-            //    _context.SaveChanges();
-            //}
+            _userManager = userManager;
         }
 
         // GET: api/Orders
@@ -44,6 +39,7 @@ namespace WebApplicationLab2.Controllers
                 ComputerId=o.ComputerId,
                 StartTime = o.Date,
                 EndTime = o.EndDate,
+                Status=o.Status,
                 Client = new ClientDto
                 {
                     Id = o.Client.Id,
@@ -66,7 +62,36 @@ namespace WebApplicationLab2.Controllers
             }
             return Order;
         }
-   
+
+        [HttpGet("client/{id}")]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByClientId(int id)
+        {
+            var clients = await _context.Clients.ToListAsync();
+            User user = await GetCurrentUserAsync();
+            if(user ==null)
+            {
+                return Unauthorized();
+            }
+            Client client = clients.FirstOrDefault(c=>c.Email==user.Email);
+            if (client == null) { return NotFound(); }
+            var orders = await _context.Orders
+            .Include(o => o.Client)
+            .Where(o => o.ClientId == id)
+            .ToListAsync();
+            var orderDtos = orders.Select(o => new OrderDto
+            {
+                Id = o.Id,
+                TotalPrice = o.TotalPrice,
+                ComputerId = o.ComputerId,
+                StartTime = o.Date,
+                EndTime = o.EndDate,
+                Status = o.Status,
+                
+            });
+            return Ok(orderDtos);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
         {
@@ -91,7 +116,8 @@ namespace WebApplicationLab2.Controllers
                 ComputerId = orderDto.ComputerId,
                 TotalPrice = orderDto.TotalPrice,
                 Date = orderDto.StartTime,
-                EndDate = orderDto.EndTime
+                EndDate = orderDto.EndTime,
+                Status = "оформлен"
             };
 
             _context.Orders.Add(order);
@@ -144,5 +170,7 @@ namespace WebApplicationLab2.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
     }
+    
 }

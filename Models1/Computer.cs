@@ -28,4 +28,16 @@ public partial class Computer
     public virtual Ram Ram { get; set; } = null!;
 
     public virtual VideoCard VideoCard { get; set; } = null!;
+
+    
+}
+public class ComputerDto
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+    public string ProcessorName { get; set; }
+    public string VideocardName { get; set; }
+    public string MemoryName { get; set; }
+    public string MonitorName { get; set; }
 }
