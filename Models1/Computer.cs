@@ -40,4 +40,5 @@ public class ComputerDto
     public string VideocardName { get; set; }
     public string MemoryName { get; set; }
     public string MonitorName { get; set; }
+    public decimal? PricePerHour { get; set; }
 }

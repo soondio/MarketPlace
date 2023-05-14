@@ -31,7 +31,8 @@ namespace WebApplicationLab2.Controllers
                    ProcessorName = c.Processor.Name,
                    VideocardName = c.VideoCard.Name,
                    MemoryName = c.Ram.Name,
-                   MonitorName = c.Monitor.Name
+                   MonitorName = c.Monitor.Name,
+                   PricePerHour=c.Priceperhour
                })
                .ToListAsync();
 
@@ -55,14 +56,16 @@ namespace WebApplicationLab2.Controllers
                 ProcessorName = computer.Processor.Name,
                 VideocardName = computer.VideoCard.Name,
                 MemoryName = computer.Ram.Name,
-                MonitorName = computer.Monitor.Name
+                MonitorName = computer.Monitor.Name,
+                PricePerHour=computer.Priceperhour
             };
 
             return Ok(computerDto);
         }
 
+
         [HttpGet("/api/availability")]
-        public async Task<ActionResult<IEnumerable<Computer>>> GetAvailability(DateTime date, DateTime date2)
+        public async Task<ActionResult<IEnumerable<ComputerDto>>> GetAvailability(DateTime date, DateTime date2)
         {
             var orders = await _context.Orders
                 .Where(o => o.Date >= date && o.EndDate <= date2)
@@ -72,10 +75,21 @@ namespace WebApplicationLab2.Controllers
 
             var computers = await _context.Computers
                 .Where(c => !occupiedComputerIds.Contains(c.Id))
+                .Select(c => new ComputerDto
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ProcessorName = c.Processor.Name,
+                    VideocardName = c.VideoCard.Name,
+                    MemoryName = c.Ram.Name,
+                    MonitorName = c.Monitor.Name,
+                    PricePerHour = c.Priceperhour
+                })
                 .ToListAsync();
 
             return computers;
         }
+
 
     }
 }

@@ -14,7 +14,7 @@ public partial class Client
 
     public string Password { get; set; } = null!;
 
-    public decimal Balance { get; set; }
+    public decimal? Balance { get; set; }
 
     public int Bonus { get; set; }
 
